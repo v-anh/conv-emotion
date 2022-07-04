@@ -20,13 +20,21 @@ class IEMOCAPDataset(Dataset):
     def __getitem__(self, index):
         vid = self.keys[index]
         return torch.FloatTensor(self.videoText[vid]),\
-               torch.FloatTensor(self.videoVisual[vid]),\
                torch.FloatTensor(self.videoAudio[vid]),\
                torch.FloatTensor([[1,0] if x=='M' else [0,1] for x in\
                                   self.videoSpeakers[vid]]),\
                torch.FloatTensor([1]*len(self.videoLabels[vid])),\
                torch.LongTensor(self.videoLabels[vid]),\
                vid
+        # return torch.FloatTensor(self.videoText[vid]),\
+        #        torch.FloatTensor(self.videoVisual[vid]),\
+        #        torch.FloatTensor(self.videoAudio[vid]),\
+        #        torch.FloatTensor([[1,0] if x=='M' else [0,1] for x in\
+        #                           self.videoSpeakers[vid]]),\
+        #        torch.FloatTensor([1]*len(self.videoLabels[vid])),\
+        #        torch.LongTensor(self.videoLabels[vid]),\
+        #        vid
+               
 
     def __len__(self):
         return self.len
